@@ -6,6 +6,8 @@ import de.hhn.ai.pmt.kuenstlicheattraktionen.model.BenutzerDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.paint.Paint;
+
 import java.util.Random;
 
 import java.util.Random;
@@ -51,6 +53,7 @@ public class HelloController {
     @FXML
     public void Init(){
 
+        outputlabel.setVisible(false);
 
     }
 
@@ -60,9 +63,24 @@ public class HelloController {
         String nname = nnametxtfield.toString();
         String password = passtxtbox.toString();
         String email = emailtxtfield.toString();
-        int id = new Random().nextInt(100000); //for now just random later check number of ids
-        //Benutzer b = new Benutzer(vname, nname, password,email,id);
+        //id wird nicht gebraucht weil das wird automatisch gefüllt!!!!
+
+        //Benutzer b = new Benutzer(vname, nname, password,email);
         //BenutzerDAO.createBenutzer(b);
+
+        //wenn alles klappt
+        outputlabel.setVisible(true);
+        outputlabel.setText("Neuer Benutzer wurde angelegt!");
+        outputlabel.setStyle("-fx-text-fill: green;");
+
+        //wenn es nicht klappt
+        outputlabel.setVisible(true);
+        outputlabel.setText("Neuer Benutzer konnte nicht angelegt werden!");
+        outputlabel.setStyle("-fx-text-fill: red;");
     }
 
+    @FXML
+    void cancleRegister(ActionEvent event) {
+        //zuruer login seite
+    }
 }
