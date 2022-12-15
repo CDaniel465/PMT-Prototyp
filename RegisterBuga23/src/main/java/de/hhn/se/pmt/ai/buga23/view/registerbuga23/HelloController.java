@@ -2,11 +2,14 @@ package de.hhn.se.pmt.ai.buga23.view.registerbuga23;
 
 
 import de.hhn.ai.pmt.kuenstlicheattraktionen.model.Benutzer;
+import de.hhn.ai.pmt.kuenstlicheattraktionen.model.BenutzerCriteria;
 import de.hhn.ai.pmt.kuenstlicheattraktionen.model.BenutzerDAO;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.paint.Paint;
+import javafx.stage.Stage;
 
 import java.util.Random;
 
@@ -51,9 +54,9 @@ public class HelloController {
     private TextField passtxtbox;
 
     @FXML
-    public void Init(){
+    public void initialize(){
 
-        outputlabel.setVisible(false);
+    outputlabel.setVisible(false);
 
     }
 
@@ -65,7 +68,12 @@ public class HelloController {
         String email = emailtxtfield.toString();
         //id wird nicht gebraucht weil das wird automatisch gefüllt!!!!
 
-        //Benutzer b = new Benutzer(vname, nname, password,email);
+        Benutzer b = new Benutzer();
+        b.setEmail(email);
+        b.setNachname(nname);
+        b.setVorname(vname);
+        b.setPassword(password);
+        BenutzerDAO.createBenutzer();
         //BenutzerDAO.createBenutzer(b);
 
         //wenn alles klappt
@@ -81,6 +89,9 @@ public class HelloController {
 
     @FXML
     void cancleRegister(ActionEvent event) {
-        //zuruer login seite
+        //zuruek login seite
+        Stage stage = (Stage) canclebtn.getScene().getWindow();
+        stage.close();
+
     }
 }

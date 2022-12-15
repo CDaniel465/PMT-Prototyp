@@ -9,11 +9,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="515.0" prefWidth="476.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="515.0" prefWidth="476.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hhn.se.pmt.ai.buga23.view.registerbuga23.HelloController">
    <bottom>
-      <FlowPane prefHeight="54.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <FlowPane prefHeight="55.0" prefWidth="476.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="registerbtn" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="53.0" prefWidth="82.0" text="Registrieren">
+            <Button fx:id="registerbtn" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#registerUser" prefHeight="53.0" prefWidth="82.0" text="Registrieren">
                <FlowPane.margin>
                   <Insets right="5.0" />
                </FlowPane.margin>
@@ -41,7 +41,7 @@
       </Label>
    </top>
    <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="440.0" prefWidth="476.0" BorderPane.alignment="CENTER">
          <children>
             <Label fx:id="vnamelabel" text="Vorname">
                <VBox.margin>
@@ -78,7 +78,7 @@
                   <Insets top="35.0" />
                </VBox.margin>
             </Label>
-            <TextField fx:id="passtxtbox" onAction="#registerUser" prefHeight="30.0" prefWidth="500.0">
+            <TextField fx:id="passtxtbox" prefHeight="30.0" prefWidth="500.0">
                <VBox.margin>
                   <Insets top="5.0" />
                </VBox.margin>
