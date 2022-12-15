@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: 
+License Type: Evaluation
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="de.hhn.ai.pmt.kuenstlicheattraktionen.model.Veranstaltung" table="`Veranstaltung`" lazy="false" discriminator-value="Veranstaltung">
+		<id name="ID" column="`ID2`" type="integer" unsaved-value="0">
+			<generator class="identity">
+			</generator>
+		</id>
+		<discriminator column="`Discriminator`" type="string"/>
+		<many-to-one name="Veranstalter" cascade="lock" column="`VeranstalterID`" class="de.hhn.ai.pmt.kuenstlicheattraktionen.model.Veranstalter" not-null="true" lazy="proxy" access="field">
+		</many-to-one>
+		<many-to-one name="Manager" cascade="lock" column="`SystemManagerID`" class="de.hhn.ai.pmt.kuenstlicheattraktionen.model.SystemManager" not-null="true" lazy="proxy" access="field">
+		</many-to-one>
+		<property name="name" type="string" length="255" not-null="false" lazy="false">
+			<column name="`Name`" default="'NULL'"/>
+		</property>
+		<property name="info" type="string" length="255" not-null="false" lazy="false">
+			<column name="`Info`" default="'NULL'"/>
+		</property>
+		<property name="abbildung" type="string" length="255" not-null="false" lazy="false">
+			<column name="`Abbildung`" default="'NULL'"/>
+		</property>
+		<property name="latitude" type="double" not-null="false" lazy="false">
+			<column name="`Latitude`" default="NULL"/>
+		</property>
+		<property name="longitude" type="double" not-null="false" lazy="false">
+			<column name="`Longitude`" default="NULL"/>
+		</property>
+		<set name="ORM_Bewertungen" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="`VeranstaltungID22`" not-null="true"/>
+			<one-to-many class="de.hhn.ai.pmt.kuenstlicheattraktionen.model.Bewertung"/>
+		</set>
+		<set name="ORM_Besucher" table="`benutzer_veranstaltung`" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="`VeranstaltungID2`" not-null="true"/>
+			<many-to-many column="`BenutzerID2`" class="de.hhn.ai.pmt.kuenstlicheattraktionen.model.Benutzer">
+			</many-to-many>
+		</set>
+		<subclass name="de.hhn.ai.pmt.kuenstlicheattraktionen.model.Attraktion" discriminator-value="Attraktion" lazy="false">
+		</subclass>
+		<subclass name="de.hhn.ai.pmt.kuenstlicheattraktionen.model.Event" discriminator-value="Event" lazy="false">
+			<property name="datum" type="timestamp" not-null="false" lazy="false">
+				<column name="`Datum`" default="NULL"/>
+			</property>
+			<property name="plaetze" type="integer" length="10" not-null="false" lazy="false">
+				<column name="`Plaetze`" default="NULL"/>
+			</property>
+			<property name="ausgebucht" type="boolean" length="1" not-null="false" lazy="false">
+				<column name="`Ausgebucht`" default="NULL"/>
+			</property>
+			<set name="ORM_Tickets" lazy="true" cascade="save-update,lock" inverse="true">
+				<key column="`VeranstaltungID2`" not-null="true"/>
+				<one-to-many class="de.hhn.ai.pmt.kuenstlicheattraktionen.model.Ticket"/>
+			</set>
+		</subclass>
+	</class>
+</hibernate-mapping>

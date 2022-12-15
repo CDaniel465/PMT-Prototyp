@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: 
+License Type: Evaluation
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="de.hhn.ai.pmt.kuenstlicheattraktionen.model.Gruppe" table="`Gruppe`" lazy="false">
+		<id name="ID" column="`ID2`" type="integer" unsaved-value="0">
+			<generator class="identity">
+			</generator>
+		</id>
+		<set name="ORM_Gruppenticket" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="`GruppeID2`" not-null="true"/>
+			<one-to-many class="de.hhn.ai.pmt.kuenstlicheattraktionen.model.Ticket"/>
+		</set>
+		<set name="ORM_Mitglieder" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="`GruppeID23`" not-null="true"/>
+			<one-to-many class="de.hhn.ai.pmt.kuenstlicheattraktionen.model.Benutzer"/>
+		</set>
+	</class>
+</hibernate-mapping>

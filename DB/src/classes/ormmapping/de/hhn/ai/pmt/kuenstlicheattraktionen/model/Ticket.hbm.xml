@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: 
+License Type: Evaluation
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="de.hhn.ai.pmt.kuenstlicheattraktionen.model.Ticket" table="`Ticket`" lazy="false">
+		<id name="ID" column="`ID`" type="integer" unsaved-value="0">
+			<generator class="identity">
+			</generator>
+		</id>
+		<many-to-one name="Besuchergruppe" cascade="lock" column="`GruppeID2`" class="de.hhn.ai.pmt.kuenstlicheattraktionen.model.Gruppe" not-null="true" lazy="proxy" access="field">
+		</many-to-one>
+		<many-to-one name="Event" cascade="lock" column="`VeranstaltungID2`" class="de.hhn.ai.pmt.kuenstlicheattraktionen.model.Event" not-null="true" lazy="proxy" access="field">
+		</many-to-one>
+		<property name="preis" type="double" not-null="false" lazy="false">
+			<column name="`Preis`" default="NULL"/>
+		</property>
+		<property name="bezahlt" type="boolean" length="1" not-null="false" lazy="false">
+			<column name="`Bezahlt`" default="NULL"/>
+		</property>
+	</class>
+</hibernate-mapping>

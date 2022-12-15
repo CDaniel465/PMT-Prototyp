@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: 
+License Type: Evaluation
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="de.hhn.ai.pmt.kuenstlicheattraktionen.model.Benutzer" table="`Benutzer`" lazy="false">
+		<id name="ID" column="`ID2`" type="integer" unsaved-value="0">
+			<generator class="identity">
+			</generator>
+		</id>
+		<many-to-one name="Gruppe" cascade="lock" column="`GruppeID23`" class="de.hhn.ai.pmt.kuenstlicheattraktionen.model.Gruppe" not-null="true" lazy="proxy" access="field">
+		</many-to-one>
+		<property name="vorname" type="string" length="255" not-null="false" lazy="false">
+			<column name="`Vorname`" default="'NULL'"/>
+		</property>
+		<property name="nachname" type="string" length="255" not-null="false" lazy="false">
+			<column name="`Nachname`" default="'NULL'"/>
+		</property>
+		<property name="email" type="string" length="255" not-null="false" lazy="false">
+			<column name="`Email`" default="'NULL'"/>
+		</property>
+		<property name="password" type="string" length="255" not-null="false" lazy="false">
+			<column name="`Password`" default="'NULL'"/>
+		</property>
+		<set name="ORM_Bewertungen" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="`BenutzerID22`" not-null="true"/>
+			<one-to-many class="de.hhn.ai.pmt.kuenstlicheattraktionen.model.Bewertung"/>
+		</set>
+		<set name="ORM_Veranstaltung" table="`benutzer_veranstaltung`" lazy="true" cascade="save-update,lock">
+			<key column="`BenutzerID2`" not-null="true"/>
+			<many-to-many column="`VeranstaltungID2`" class="de.hhn.ai.pmt.kuenstlicheattraktionen.model.Veranstaltung">
+			</many-to-many>
+		</set>
+	</class>
+</hibernate-mapping>
