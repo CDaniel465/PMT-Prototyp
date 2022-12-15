@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
+import org.orm.PersistentException;
 
 import java.util.Random;
 
@@ -73,18 +74,20 @@ public class HelloController {
         b.setNachname(nname);
         b.setVorname(vname);
         b.setPassword(password);
-        BenutzerDAO.createBenutzer();
-        //BenutzerDAO.createBenutzer(b);
 
-        //wenn alles klappt
-        outputlabel.setVisible(true);
-        outputlabel.setText("Neuer Benutzer wurde angelegt!");
-        outputlabel.setStyle("-fx-text-fill: green;");
-
-        //wenn es nicht klappt
-        outputlabel.setVisible(true);
-        outputlabel.setText("Neuer Benutzer konnte nicht angelegt werden!");
-        outputlabel.setStyle("-fx-text-fill: red;");
+        try{
+            //wenn es klappt
+            BenutzerDAO.save(b);
+            outputlabel.setVisible(true);
+            outputlabel.setText("Neuer Benutzer wurde angelegt!");
+            outputlabel.setStyle("-fx-text-fill: green;");
+        }
+        catch (PersistentException e){
+            //wenn es nicht klappt
+            outputlabel.setVisible(true);
+            outputlabel.setText("Neuer Benutzer konnte nicht angelegt werden!");
+            outputlabel.setStyle("-fx-text-fill: red;");
+        }
     }
 
     @FXML
