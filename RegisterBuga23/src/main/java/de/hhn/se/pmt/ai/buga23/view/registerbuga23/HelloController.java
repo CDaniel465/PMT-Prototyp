@@ -97,8 +97,15 @@ public class HelloController {
             b.setVorname(vname);
             b.setPassword(password);
 
+
+            //BenutzerDAO.createBenutzer().setVorname(vname);
+            //BenutzerDAO.createBenutzer().setNachname(nname);
+            //BenutzerDAO.createBenutzer().setEmail(email);
+            //BenutzerDAO.createBenutzer().setPassword(password);
+
             try{
                 //Speichern von Benutzer objekt
+
                 BenutzerDAO.save(b);
                 outputlabel.setVisible(true);
                 outputlabel.setText("Neuer Benutzer wurde angelegt!");
