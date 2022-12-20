@@ -12,6 +12,7 @@ import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import org.orm.PersistentException;
 
+import java.util.Objects;
 import java.util.Random;
 
 import java.util.Random;
@@ -56,37 +57,59 @@ public class HelloController {
 
     @FXML
     public void initialize(){
-
-    outputlabel.setVisible(false);
-
+        outputlabel.setVisible(false);
     }
 
     @FXML
     void registerUser(ActionEvent event) {
-        String vname = vnametxtfield.toString();
-        String nname = nnametxtfield.toString();
-        String password = passtxtbox.toString();
-        String email = emailtxtfield.toString();
-        //id wird nicht gebraucht weil das wird automatisch gefüllt!!!!
+        String vname = vnametxtfield.getText();
+        String nname = nnametxtfield.getText();
+        String password = passtxtbox.getText();
+        String email = emailtxtfield.getText();
+        //id wird nicht gebraucht, weil das wird automatisch gefuellt!!!!
 
-        Benutzer b = new Benutzer();
-        b.setEmail(email);
-        b.setNachname(nname);
-        b.setVorname(vname);
-        b.setPassword(password);
-
-        try{
-            //wenn es klappt
-            BenutzerDAO.save(b);
+        if (vname.equals("")){
+            //falls Vorname Leer ist
             outputlabel.setVisible(true);
-            outputlabel.setText("Neuer Benutzer wurde angelegt!");
-            outputlabel.setStyle("-fx-text-fill: green;");
-        }
-        catch (PersistentException e){
-            //wenn es nicht klappt
-            outputlabel.setVisible(true);
-            outputlabel.setText("Neuer Benutzer konnte nicht angelegt werden!");
+            outputlabel.setText("Der Vorname darf Nicht leer sein!");
             outputlabel.setStyle("-fx-text-fill: red;");
+        } else if (nname.equals("")) {
+            //falls Nachnahme Leer ist
+            outputlabel.setVisible(true);
+            outputlabel.setText("Der Nachname darf Nicht leer sein!");
+            outputlabel.setStyle("-fx-text-fill: red;");
+        } else if (password.equals("")) {
+            //falls Passwort Leer ist
+            outputlabel.setVisible(true);
+            outputlabel.setText("Das Password darf Nicht leer sein!");
+            outputlabel.setStyle("-fx-text-fill: red;");
+        } else if (email.equals("")) {
+            //falls Email Leer ist
+            outputlabel.setVisible(true);
+            outputlabel.setText("Die Email darf Nicht leer sein!");
+            outputlabel.setStyle("-fx-text-fill: red;");
+        }
+        else {
+            //Erstellen von Benutzer objekt
+            Benutzer b = new Benutzer();
+            b.setEmail(email);
+            b.setNachname(nname);
+            b.setVorname(vname);
+            b.setPassword(password);
+
+            try{
+                //Speichern von Benutzer objekt
+                BenutzerDAO.save(b);
+                outputlabel.setVisible(true);
+                outputlabel.setText("Neuer Benutzer wurde angelegt!");
+                outputlabel.setStyle("-fx-text-fill: green;");
+            }
+            catch (PersistentException e){
+                //falls erstellen nicht funktionieren
+                outputlabel.setVisible(true);
+                outputlabel.setText("Neuer Benutzer konnte nicht angelegt werden!");
+                outputlabel.setStyle("-fx-text-fill: red;");
+            }
         }
     }
 
